@@ -1,0 +1,493 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		07CA020715EEC15F00753BB1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CA020615EEC15F00753BB1 /* UIKit.framework */; };
+		07CA020915EEC15F00753BB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CA020815EEC15F00753BB1 /* Foundation.framework */; };
+		07CA020B15EEC15F00753BB1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CA020A15EEC15F00753BB1 /* CoreGraphics.framework */; };
+		07CA020D15EEC15F00753BB1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CA020C15EEC15F00753BB1 /* CoreData.framework */; };
+		07CA021315EEC15F00753BB1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07CA021115EEC15F00753BB1 /* InfoPlist.strings */; };
+		07CA021515EEC15F00753BB1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CA021415EEC15F00753BB1 /* main.m */; };
+		07CA021915EEC15F00753BB1 /* MLGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CA021815EEC15F00753BB1 /* MLGAppDelegate.m */; };
+		07CA021C15EEC15F00753BB1 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07CA021A15EEC15F00753BB1 /* MainStoryboard_iPhone.storyboard */; };
+		07CA021F15EEC15F00753BB1 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07CA021D15EEC15F00753BB1 /* MainStoryboard_iPad.storyboard */; };
+		07CA022215EEC15F00753BB1 /* MiLog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 07CA022015EEC15F00753BB1 /* MiLog.xcdatamodeld */; };
+		07CA022515EEC15F00753BB1 /* MLGMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CA022415EEC15F00753BB1 /* MLGMasterViewController.m */; };
+		07CA022815EEC15F00753BB1 /* MLGDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CA022715EEC15F00753BB1 /* MLGDetailViewController.m */; };
+		07CA023015EEC15F00753BB1 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CA022F15EEC15F00753BB1 /* SenTestingKit.framework */; };
+		07CA023115EEC15F00753BB1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CA020615EEC15F00753BB1 /* UIKit.framework */; };
+		07CA023215EEC15F00753BB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CA020815EEC15F00753BB1 /* Foundation.framework */; };
+		07CA023315EEC15F00753BB1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CA020C15EEC15F00753BB1 /* CoreData.framework */; };
+		07CA023B15EEC15F00753BB1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07CA023915EEC15F00753BB1 /* InfoPlist.strings */; };
+		07CA023E15EEC15F00753BB1 /* MiLogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CA023D15EEC15F00753BB1 /* MiLogTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		07CA023415EEC15F00753BB1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07CA01F915EEC15F00753BB1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 07CA020115EEC15F00753BB1;
+			remoteInfo = MiLog;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		07CA020215EEC15F00753BB1 /* MiLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		07CA020615EEC15F00753BB1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		07CA020815EEC15F00753BB1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		07CA020A15EEC15F00753BB1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		07CA020C15EEC15F00753BB1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		07CA021015EEC15F00753BB1 /* MiLog-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MiLog-Info.plist"; sourceTree = "<group>"; };
+		07CA021215EEC15F00753BB1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		07CA021415EEC15F00753BB1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		07CA021615EEC15F00753BB1 /* MiLog-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MiLog-Prefix.pch"; sourceTree = "<group>"; };
+		07CA021715EEC15F00753BB1 /* MLGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLGAppDelegate.h; sourceTree = "<group>"; };
+		07CA021815EEC15F00753BB1 /* MLGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLGAppDelegate.m; sourceTree = "<group>"; };
+		07CA021B15EEC15F00753BB1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		07CA021E15EEC15F00753BB1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		07CA022115EEC15F00753BB1 /* MiLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MiLog.xcdatamodel; sourceTree = "<group>"; };
+		07CA022315EEC15F00753BB1 /* MLGMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLGMasterViewController.h; sourceTree = "<group>"; };
+		07CA022415EEC15F00753BB1 /* MLGMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLGMasterViewController.m; sourceTree = "<group>"; };
+		07CA022615EEC15F00753BB1 /* MLGDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLGDetailViewController.h; sourceTree = "<group>"; };
+		07CA022715EEC15F00753BB1 /* MLGDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLGDetailViewController.m; sourceTree = "<group>"; };
+		07CA022E15EEC15F00753BB1 /* MiLogTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MiLogTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		07CA022F15EEC15F00753BB1 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		07CA023815EEC15F00753BB1 /* MiLogTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MiLogTests-Info.plist"; sourceTree = "<group>"; };
+		07CA023A15EEC15F00753BB1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		07CA023C15EEC15F00753BB1 /* MiLogTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MiLogTests.h; sourceTree = "<group>"; };
+		07CA023D15EEC15F00753BB1 /* MiLogTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiLogTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		07CA01FF15EEC15F00753BB1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07CA020715EEC15F00753BB1 /* UIKit.framework in Frameworks */,
+				07CA020915EEC15F00753BB1 /* Foundation.framework in Frameworks */,
+				07CA020B15EEC15F00753BB1 /* CoreGraphics.framework in Frameworks */,
+				07CA020D15EEC15F00753BB1 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07CA022A15EEC15F00753BB1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07CA023015EEC15F00753BB1 /* SenTestingKit.framework in Frameworks */,
+				07CA023115EEC15F00753BB1 /* UIKit.framework in Frameworks */,
+				07CA023215EEC15F00753BB1 /* Foundation.framework in Frameworks */,
+				07CA023315EEC15F00753BB1 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		07CA01F715EEC15F00753BB1 = {
+			isa = PBXGroup;
+			children = (
+				07CA020E15EEC15F00753BB1 /* MiLog */,
+				07CA023615EEC15F00753BB1 /* MiLogTests */,
+				07CA020515EEC15F00753BB1 /* Frameworks */,
+				07CA020315EEC15F00753BB1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		07CA020315EEC15F00753BB1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				07CA020215EEC15F00753BB1 /* MiLog.app */,
+				07CA022E15EEC15F00753BB1 /* MiLogTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		07CA020515EEC15F00753BB1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				07CA020615EEC15F00753BB1 /* UIKit.framework */,
+				07CA020815EEC15F00753BB1 /* Foundation.framework */,
+				07CA020A15EEC15F00753BB1 /* CoreGraphics.framework */,
+				07CA020C15EEC15F00753BB1 /* CoreData.framework */,
+				07CA022F15EEC15F00753BB1 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		07CA020E15EEC15F00753BB1 /* MiLog */ = {
+			isa = PBXGroup;
+			children = (
+				07CA021715EEC15F00753BB1 /* MLGAppDelegate.h */,
+				07CA021815EEC15F00753BB1 /* MLGAppDelegate.m */,
+				07CA021A15EEC15F00753BB1 /* MainStoryboard_iPhone.storyboard */,
+				07CA021D15EEC15F00753BB1 /* MainStoryboard_iPad.storyboard */,
+				07CA022315EEC15F00753BB1 /* MLGMasterViewController.h */,
+				07CA022415EEC15F00753BB1 /* MLGMasterViewController.m */,
+				07CA022615EEC15F00753BB1 /* MLGDetailViewController.h */,
+				07CA022715EEC15F00753BB1 /* MLGDetailViewController.m */,
+				07CA022015EEC15F00753BB1 /* MiLog.xcdatamodeld */,
+				07CA020F15EEC15F00753BB1 /* Supporting Files */,
+			);
+			path = MiLog;
+			sourceTree = "<group>";
+		};
+		07CA020F15EEC15F00753BB1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				07CA021015EEC15F00753BB1 /* MiLog-Info.plist */,
+				07CA021115EEC15F00753BB1 /* InfoPlist.strings */,
+				07CA021415EEC15F00753BB1 /* main.m */,
+				07CA021615EEC15F00753BB1 /* MiLog-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		07CA023615EEC15F00753BB1 /* MiLogTests */ = {
+			isa = PBXGroup;
+			children = (
+				07CA023C15EEC15F00753BB1 /* MiLogTests.h */,
+				07CA023D15EEC15F00753BB1 /* MiLogTests.m */,
+				07CA023715EEC15F00753BB1 /* Supporting Files */,
+			);
+			path = MiLogTests;
+			sourceTree = "<group>";
+		};
+		07CA023715EEC15F00753BB1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				07CA023815EEC15F00753BB1 /* MiLogTests-Info.plist */,
+				07CA023915EEC15F00753BB1 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		07CA020115EEC15F00753BB1 /* MiLog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07CA024115EEC15F00753BB1 /* Build configuration list for PBXNativeTarget "MiLog" */;
+			buildPhases = (
+				07CA01FE15EEC15F00753BB1 /* Sources */,
+				07CA01FF15EEC15F00753BB1 /* Frameworks */,
+				07CA020015EEC15F00753BB1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MiLog;
+			productName = MiLog;
+			productReference = 07CA020215EEC15F00753BB1 /* MiLog.app */;
+			productType = "com.apple.product-type.application";
+		};
+		07CA022D15EEC15F00753BB1 /* MiLogTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07CA024415EEC15F00753BB1 /* Build configuration list for PBXNativeTarget "MiLogTests" */;
+			buildPhases = (
+				07CA022915EEC15F00753BB1 /* Sources */,
+				07CA022A15EEC15F00753BB1 /* Frameworks */,
+				07CA022B15EEC15F00753BB1 /* Resources */,
+				07CA022C15EEC15F00753BB1 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				07CA023515EEC15F00753BB1 /* PBXTargetDependency */,
+			);
+			name = MiLogTests;
+			productName = MiLogTests;
+			productReference = 07CA022E15EEC15F00753BB1 /* MiLogTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		07CA01F915EEC15F00753BB1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MLG;
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Christopher Morse";
+			};
+			buildConfigurationList = 07CA01FC15EEC15F00753BB1 /* Build configuration list for PBXProject "MiLog" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 07CA01F715EEC15F00753BB1;
+			productRefGroup = 07CA020315EEC15F00753BB1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				07CA020115EEC15F00753BB1 /* MiLog */,
+				07CA022D15EEC15F00753BB1 /* MiLogTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		07CA020015EEC15F00753BB1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07CA021315EEC15F00753BB1 /* InfoPlist.strings in Resources */,
+				07CA021C15EEC15F00753BB1 /* MainStoryboard_iPhone.storyboard in Resources */,
+				07CA021F15EEC15F00753BB1 /* MainStoryboard_iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07CA022B15EEC15F00753BB1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07CA023B15EEC15F00753BB1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		07CA022C15EEC15F00753BB1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		07CA01FE15EEC15F00753BB1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07CA021515EEC15F00753BB1 /* main.m in Sources */,
+				07CA021915EEC15F00753BB1 /* MLGAppDelegate.m in Sources */,
+				07CA022215EEC15F00753BB1 /* MiLog.xcdatamodeld in Sources */,
+				07CA022515EEC15F00753BB1 /* MLGMasterViewController.m in Sources */,
+				07CA022815EEC15F00753BB1 /* MLGDetailViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07CA022915EEC15F00753BB1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07CA023E15EEC15F00753BB1 /* MiLogTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		07CA023515EEC15F00753BB1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 07CA020115EEC15F00753BB1 /* MiLog */;
+			targetProxy = 07CA023415EEC15F00753BB1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		07CA021115EEC15F00753BB1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07CA021215EEC15F00753BB1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		07CA021A15EEC15F00753BB1 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07CA021B15EEC15F00753BB1 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		07CA021D15EEC15F00753BB1 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07CA021E15EEC15F00753BB1 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		07CA023915EEC15F00753BB1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07CA023A15EEC15F00753BB1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		07CA023F15EEC15F00753BB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		07CA024015EEC15F00753BB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		07CA024215EEC15F00753BB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MiLog/MiLog-Prefix.pch";
+				INFOPLIST_FILE = "MiLog/MiLog-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		07CA024315EEC15F00753BB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MiLog/MiLog-Prefix.pch";
+				INFOPLIST_FILE = "MiLog/MiLog-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		07CA024515EEC15F00753BB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MiLog.app/MiLog";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MiLog/MiLog-Prefix.pch";
+				INFOPLIST_FILE = "MiLogTests/MiLogTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		07CA024615EEC15F00753BB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MiLog.app/MiLog";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MiLog/MiLog-Prefix.pch";
+				INFOPLIST_FILE = "MiLogTests/MiLogTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		07CA01FC15EEC15F00753BB1 /* Build configuration list for PBXProject "MiLog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07CA023F15EEC15F00753BB1 /* Debug */,
+				07CA024015EEC15F00753BB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07CA024115EEC15F00753BB1 /* Build configuration list for PBXNativeTarget "MiLog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07CA024215EEC15F00753BB1 /* Debug */,
+				07CA024315EEC15F00753BB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		07CA024415EEC15F00753BB1 /* Build configuration list for PBXNativeTarget "MiLogTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07CA024515EEC15F00753BB1 /* Debug */,
+				07CA024615EEC15F00753BB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		07CA022015EEC15F00753BB1 /* MiLog.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				07CA022115EEC15F00753BB1 /* MiLog.xcdatamodel */,
+			);
+			currentVersion = 07CA022115EEC15F00753BB1 /* MiLog.xcdatamodel */;
+			path = MiLog.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 07CA01F915EEC15F00753BB1 /* Project object */;
+}
