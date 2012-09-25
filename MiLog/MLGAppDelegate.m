@@ -10,7 +10,11 @@
 
 #import "MLGMasterViewController.h"
 
+#import "TimerEvent.h"
+
 @implementation MLGAppDelegate
+
+
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
@@ -18,23 +22,23 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+        UISplitViewController *splitViewController = (UISplitViewController *) self.window.rootViewController;
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-        splitViewController.delegate = (id)navigationController.topViewController;
-        
+        splitViewController.delegate = (id) navigationController.topViewController;
+
         UINavigationController *masterNavigationController = [splitViewController.viewControllers objectAtIndex:0];
-        MLGMasterViewController *controller = (MLGMasterViewController *)masterNavigationController.topViewController;
+        MLGMasterViewController *controller = (MLGMasterViewController *) masterNavigationController.topViewController;
         controller.managedObjectContext = self.managedObjectContext;
-    } else {
-        UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-        MLGMasterViewController *controller = (MLGMasterViewController *)navigationController.topViewController;
+    }
+    else {
+        UINavigationController *navigationController = (UINavigationController *) self.window.rootViewController;
+        MLGMasterViewController *controller = (MLGMasterViewController *) navigationController.topViewController;
         controller.managedObjectContext = self.managedObjectContext;
     }
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     UINavigationController *navigationController = (UINavigationController *) self.window.rootViewController;
@@ -69,11 +73,11 @@
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil) {
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-             // Replace this implementation with code to handle the error appropriately.
-             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
+
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+
             abort();
-        } 
+        }
     }
 }
 
@@ -86,7 +90,7 @@
     if (_managedObjectContext != nil) {
         return _managedObjectContext;
     }
-    
+
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (coordinator != nil) {
         _managedObjectContext = [[NSManagedObjectContext alloc] init];
@@ -114,39 +118,10 @@
     if (_persistentStoreCoordinator != nil) {
         return _persistentStoreCoordinator;
     }
-    
+
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"MiLog.sqlite"];
-    
-    
+
     NSError *error = nil;
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-
-        [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
-
-        /*
-         Replace this implementation with code to handle the error appropriately.
-         
-         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-         
-         Typical reasons for an error here include:
-         * The persistent store is not accessible;
-         * The schema for the persistent store is incompatible with current managed object model.
-         Check the error message to determine what the actual problem was.
-         
-         
-         If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is pointing into the application's resources directory instead of a writeable directory.
-         
-         If you encounter schema incompatibility errors during development, you can reduce their frequency by:
-         * Simply deleting the existing store:
-         [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]
-         
-         * Performing automatic lightweight migration by passing the following dictionary as the options parameter:
-         @{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES}
-         
-         Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
-         
-         */
     NSDictionary *options = @{
     NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES
     };
@@ -168,7 +143,8 @@
 // Returns the URL to the application's Documents directory.
 - (NSURL *)applicationDocumentsDirectory
 {
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask]
+                            lastObject];
 }
 
 @end
