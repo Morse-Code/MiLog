@@ -7,10 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TimerEvent.h"
 
-@interface MLGDetailViewController : UIViewController <UISplitViewControllerDelegate>
+@class TimerEvent;
 
-@property (strong, nonatomic) id detailItem;
+@interface MLGDetailViewController : UIViewController <UISplitViewControllerDelegate, UITextFieldDelegate> {
 
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+}
+
+
+
+@property(strong, nonatomic) TimerEvent *detailItem;
+
+@property(weak, nonatomic) IBOutlet UITextField *name;
+@property(weak, nonatomic) IBOutlet UITextView *note;
+
+- (void)save;
+
+- (void)cancel;
+
 @end

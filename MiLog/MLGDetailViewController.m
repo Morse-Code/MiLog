@@ -8,8 +8,17 @@
 
 #import "MLGDetailViewController.h"
 
+#define NEW 0
+#define ACTIVE 1
+#define PAUSE 2
+#define HISTORY 3
+
 @interface MLGDetailViewController ()
-@property (strong, nonatomic) UIPopoverController *masterPopoverController;
+
+
+
+@property(strong, nonatomic) UIPopoverController *masterPopoverController;
+
 - (void)configureView;
 @end
 
@@ -21,59 +30,61 @@
 {
     if (_detailItem != newDetailItem) {
         _detailItem = newDetailItem;
-        
-        // Update the view.
+
         [self configureView];
     }
 
     if (self.masterPopoverController != nil) {
         [self.masterPopoverController dismissPopoverAnimated:YES];
-    }        
+    }
 }
 
 - (void)configureView
 {
-    // Update the user interface for the detail item.
-
     if (self.detailItem) {
-        self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"timeStamp"] description];
+        self.name.text = self.detailItem.name;
+        self.note.text = self.detailItem.note;
     }
 }
+
+#pragma mark - Setting up the view
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-    } else {
+    }
+    else {
         return YES;
     }
 }
 
-#pragma mark - Split view
+#pragma mark - Split view for iPad
 
-- (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
+- (void)splitViewController:(UISplitViewController *)splitController
+     willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem
+       forPopoverController:(UIPopoverController *)popoverController
 {
     barButtonItem.title = NSLocalizedString(@"Master", @"Master");
     [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
     self.masterPopoverController = popoverController;
 }
 
-- (void)splitViewController:(UISplitViewController *)splitController willShowViewController:(UIViewController *)viewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+- (void)splitViewController:(UISplitViewController *)splitController
+     willShowViewController:(UIViewController *)viewController
+  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
-    // Called when the view is shown again in the split view, invalidating the button and popover controller.
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     self.masterPopoverController = nil;
 }
