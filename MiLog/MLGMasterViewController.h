@@ -8,15 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@class MLGDetailViewController;
-
 #import <CoreData/CoreData.h>
+#import "MLGDetailViewController.h"
 
-@interface MLGMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface MLGMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITableViewDelegate> {
+    NSDateFormatter *dateFormatter;
+}
 
-@property (strong, nonatomic) MLGDetailViewController *detailViewController;
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
+@property(strong, nonatomic) MLGDetailViewController *detailViewController;
+
+@property(strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property(strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
+
+
 
 @end

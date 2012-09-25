@@ -10,8 +10,19 @@
 
 #import "MLGDetailViewController.h"
 
+#import "MLGTimerCell.h"
+
+#define NEW 0
+#define ACTIVE 1
+#define PAUSE 2
+#define HISTORY 3
+
 @interface MLGMasterViewController ()
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+
+
+
+- (void)configureCell:(MLGTimerCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+
 @end
 
 @implementation MLGMasterViewController
@@ -32,6 +43,7 @@
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+                                                   initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (MLGDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
@@ -54,22 +66,8 @@
 - (void)insertNewObject:(id)sender
 {
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-    NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-    
-    // If appropriate, configure the new managed object.
-    // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-    [newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
-    [newManagedObject setValue:@"Hello" forKey:@"logEntry"];
-    
-    // Save the context.
-    NSError *error = nil;
-    if (![context save:&error]) {
-         // Replace this implementation with code to handle the error appropriately.
-         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
+    TimerEvent *newManagedObject = [TimerEvent addEventToContext:context];
+    [self performSegueWithIdentifier:@"showDetail" sender:newManagedObject];
 }
 
 #pragma mark - Table View
@@ -87,7 +85,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    MLGTimerCell *cell = (MLGTimerCell *) [tableView dequeueReusableCellWithIdentifier:@"TimerCell"];
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
@@ -123,17 +121,37 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        self.detailViewController.detailItem = object;
+        TimerEvent *event = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        self.detailViewController.detailItem = event;
     }
+    else {
+        TimerEvent *event = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        if (event.state == ACTIVE) {
+            [self pauseTimerWithTimerEvent:event];
+        }
+        else if (event.state != HISTORY) {
+            [self startTimerWithTimerEvent:event];
+        }
+    }
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    TimerEvent *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"showDetail" sender:object];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        [[segue destinationViewController] setDetailItem:object];
+    [[segue destinationViewController] setDetailItem:sender];
+}
+
+- (void)configureCell:(MLGTimerCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    TimerEvent *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [cell configureWithTimerEvent:event];
+}
     }
 }
 
@@ -144,10 +162,10 @@
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }
-    
+
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    // Edit the entity name as appropriate.
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"TimerEvent"
+                                              inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
     // Set the batch size to a suitable number.
@@ -224,23 +242,6 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
-}
-
-/*
-// Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed. 
- 
- - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    // In the simplest, most efficient, case, reload the table view.
-    [self.tableView reloadData];
-}
- */
-
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
-    cell.detailTextLabel.text = [[object valueForKey:@"logEntry"] description];
 }
 
 @end
