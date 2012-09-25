@@ -50,6 +50,12 @@
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (MLGDetailViewController *) [[self.splitViewController.viewControllers lastObject]
                                                                                                        topViewController];
+    if (self.pollingTimer == nil) {
+        self.pollingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 / 10.0
+                                                             target:self
+                                                           selector:@selector(updateTimers)
+                                                           userInfo:nil repeats:YES];
+    }
 }
 
 - (void)viewDidUnload
@@ -188,6 +194,27 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     TimerEvent *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [cell configureWithTimerEvent:event];
 }
+
+#pragma mark - Timer methods
+
+- (void)startTimerWithTimerEvent:(TimerEvent *)event
+{
+    event.start = [NSDate date];
+    event.state = ACTIVE;
+}
+
+- (void)pauseTimerWithTimerEvent:(TimerEvent *)event
+{
+    [event setElapsedForStopDate:[NSDate date] withState:PAUSE];
+}
+
+- (void)updateTimers
+{
+    NSArray *fetchedEvents = [[self fetchedResultsController] fetchedObjects];
+    for (TimerEvent *event in fetchedEvents) {
+        if (event.state == ACTIVE) {
+            [event setTimeIntervalToDate:[NSDate date]];
+        }
     }
 }
 

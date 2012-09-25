@@ -21,8 +21,12 @@
 
 @property(strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property(strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property(strong, nonatomic) NSTimer *pollingTimer;
 
+- (void)startTimerWithTimerEvent:(TimerEvent *)event;
 
+- (void)pauseTimerWithTimerEvent:(TimerEvent *)event;
 
+- (void)updateTimers;
 
 @end
