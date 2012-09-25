@@ -52,6 +52,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                  target:self action:@selector(cancel)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc]
+                                                    initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self
+                                                                         action:@selector(save)];
+    self.navigationItem.rightBarButtonItem = saveButton;
     [self configureView];
 }
 
@@ -68,6 +76,43 @@
     else {
         return YES;
     }
+}
+
+#pragma mark - Save and Cancel
+
+- (void)save
+{
+
+    self.detailItem.name = self.name.text;
+    self.detailItem.note = self.note.text;
+
+    NSError *error = nil;
+    if (![self.detailItem.managedObjectContext save:&error]) {
+
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+
+        abort();
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
+
+- (void)cancel
+{
+
+    if (self.detailItem.state == NEW) {
+        [self.detailItem.managedObjectContext deleteObject:self.detailItem];
+    }
+
+    NSError *error = nil;
+    if (![self.detailItem.managedObjectContext save:&error]) {
+
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+
+        abort();
+    }
+
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Split view for iPad
