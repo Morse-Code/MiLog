@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+#import "TimerEvent.h"
+
 @interface MLGTimerCell : UITableViewCell
+
+
+
+@property(weak, nonatomic) IBOutlet UILabel *name;
+@property(weak, nonatomic) IBOutlet UILabel *startDate;
+@property(weak, nonatomic) IBOutlet UILabel *timer;
+
+- (void)configureWithTimerEvent:(TimerEvent *)event;
+
 
 @end
