@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		078F7A22160E246200F817FA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078F7A21160E246200F817FA /* Default-568h@2x.png */; };
+		078F7A26160E269300F817FA /* MLGTimerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F7A25160E269300F817FA /* MLGTimerCell.m */; };
+		078F7A31160E43E700F817FA /* TimerEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F7A30160E43E700F817FA /* TimerEvent.m */; };
 		07CA020715EEC15F00753BB1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CA020615EEC15F00753BB1 /* UIKit.framework */; };
 		07CA020915EEC15F00753BB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CA020815EEC15F00753BB1 /* Foundation.framework */; };
 		07CA020B15EEC15F00753BB1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CA020A15EEC15F00753BB1 /* CoreGraphics.framework */; };
@@ -38,6 +41,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		076D84E0160D6E81005AF996 /* MiLog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MiLog.entitlements; sourceTree = "<group>"; };
+		078F7A21160E246200F817FA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		078F7A24160E269300F817FA /* MLGTimerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLGTimerCell.h; sourceTree = "<group>"; };
+		078F7A25160E269300F817FA /* MLGTimerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLGTimerCell.m; sourceTree = "<group>"; };
+		078F7A2F160E43E700F817FA /* TimerEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerEvent.h; sourceTree = "<group>"; };
+		078F7A30160E43E700F817FA /* TimerEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerEvent.m; sourceTree = "<group>"; };
 		07CA020215EEC15F00753BB1 /* MiLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07CA020615EEC15F00753BB1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		07CA020815EEC15F00753BB1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -90,9 +99,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		078F7A2B160E432500F817FA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				07CA022015EEC15F00753BB1 /* MiLog.xcdatamodeld */,
+				078F7A2F160E43E700F817FA /* TimerEvent.h */,
+				078F7A30160E43E700F817FA /* TimerEvent.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		078F7A2D160E434900F817FA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				078F7A24160E269300F817FA /* MLGTimerCell.h */,
+				078F7A25160E269300F817FA /* MLGTimerCell.m */,
+				07CA021A15EEC15F00753BB1 /* MainStoryboard_iPhone.storyboard */,
+				07CA021D15EEC15F00753BB1 /* MainStoryboard_iPad.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		078F7A2E160E435700F817FA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				07CA021715EEC15F00753BB1 /* MLGAppDelegate.h */,
+				07CA021815EEC15F00753BB1 /* MLGAppDelegate.m */,
+				07CA022315EEC15F00753BB1 /* MLGMasterViewController.h */,
+				07CA022415EEC15F00753BB1 /* MLGMasterViewController.m */,
+				07CA022615EEC15F00753BB1 /* MLGDetailViewController.h */,
+				07CA022715EEC15F00753BB1 /* MLGDetailViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		07CA01F715EEC15F00753BB1 = {
 			isa = PBXGroup;
 			children = (
+				078F7A21160E246200F817FA /* Default-568h@2x.png */,
 				07CA020E15EEC15F00753BB1 /* MiLog */,
 				07CA023615EEC15F00753BB1 /* MiLogTests */,
 				07CA020515EEC15F00753BB1 /* Frameworks */,
@@ -124,15 +168,9 @@
 		07CA020E15EEC15F00753BB1 /* MiLog */ = {
 			isa = PBXGroup;
 			children = (
-				07CA021715EEC15F00753BB1 /* MLGAppDelegate.h */,
-				07CA021815EEC15F00753BB1 /* MLGAppDelegate.m */,
-				07CA021A15EEC15F00753BB1 /* MainStoryboard_iPhone.storyboard */,
-				07CA021D15EEC15F00753BB1 /* MainStoryboard_iPad.storyboard */,
-				07CA022315EEC15F00753BB1 /* MLGMasterViewController.h */,
-				07CA022415EEC15F00753BB1 /* MLGMasterViewController.m */,
-				07CA022615EEC15F00753BB1 /* MLGDetailViewController.h */,
-				07CA022715EEC15F00753BB1 /* MLGDetailViewController.m */,
-				07CA022015EEC15F00753BB1 /* MiLog.xcdatamodeld */,
+				078F7A2D160E434900F817FA /* View */,
+				078F7A2E160E435700F817FA /* Controller */,
+				078F7A2B160E432500F817FA /* Model */,
 				07CA020F15EEC15F00753BB1 /* Supporting Files */,
 			);
 			path = MiLog;
@@ -141,6 +179,7 @@
 		07CA020F15EEC15F00753BB1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				076D84E0160D6E81005AF996 /* MiLog.entitlements */,
 				07CA021015EEC15F00753BB1 /* MiLog-Info.plist */,
 				07CA021115EEC15F00753BB1 /* InfoPlist.strings */,
 				07CA021415EEC15F00753BB1 /* main.m */,
@@ -243,6 +282,7 @@
 				07CA021315EEC15F00753BB1 /* InfoPlist.strings in Resources */,
 				07CA021C15EEC15F00753BB1 /* MainStoryboard_iPhone.storyboard in Resources */,
 				07CA021F15EEC15F00753BB1 /* MainStoryboard_iPad.storyboard in Resources */,
+				078F7A22160E246200F817FA /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +322,8 @@
 				07CA022215EEC15F00753BB1 /* MiLog.xcdatamodeld in Sources */,
 				07CA022515EEC15F00753BB1 /* MLGMasterViewController.m in Sources */,
 				07CA022815EEC15F00753BB1 /* MLGDetailViewController.m in Sources */,
+				078F7A26160E269300F817FA /* MLGTimerCell.m in Sources */,
+				078F7A31160E43E700F817FA /* TimerEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,10 +435,13 @@
 		07CA024215EEC15F00753BB1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MiLog/MiLog.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Morse (6HP5A29P88)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MiLog/MiLog-Prefix.pch";
 				INFOPLIST_FILE = "MiLog/MiLog-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5BAE604A-0998-4AFC-8890-C69BD3F22147";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -404,10 +449,13 @@
 		07CA024315EEC15F00753BB1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MiLog/MiLog.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Morse (6HP5A29P88)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MiLog/MiLog-Prefix.pch";
 				INFOPLIST_FILE = "MiLog/MiLog-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5BAE604A-0998-4AFC-8890-C69BD3F22147";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -465,6 +513,7 @@
 				07CA024315EEC15F00753BB1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		07CA024415EEC15F00753BB1 /* Build configuration list for PBXNativeTarget "MiLogTests" */ = {
 			isa = XCConfigurationList;
@@ -473,6 +522,7 @@
 				07CA024615EEC15F00753BB1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
