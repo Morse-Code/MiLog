@@ -29,6 +29,7 @@
 
 
 #pragma mark - Set up view
+@synthesize activeTimerCount = _activeTimerCount;
 
 - (void)awakeFromNib
 {
@@ -51,11 +52,14 @@
     self.detailViewController = (MLGDetailViewController *) [[self.splitViewController.viewControllers lastObject]
                                                                                                        topViewController];
     if (self.pollingTimer == nil) {
+    self.activeTimerCount = 0;
+            self.activeTimerCount++;
         self.pollingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 / 10.0
                                                              target:self
                                                            selector:@selector(updateTimers)
                                                            userInfo:nil repeats:YES];
     }
+    [UIApplication sharedApplication].applicationIconBadgeNumber = self.activeTimerCount;
 }
 
 - (void)viewDidUnload

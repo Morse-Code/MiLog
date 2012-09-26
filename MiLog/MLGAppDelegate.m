@@ -12,6 +12,11 @@
 
 #import "TimerEvent.h"
 
+#define NEW 0
+#define ACTIVE 1
+#define PAUSE 2
+#define HISTORY 3
+
 @implementation MLGAppDelegate
 
 
@@ -43,6 +48,14 @@
 {
     UINavigationController *navigationController = (UINavigationController *) self.window.rootViewController;
     MLGMasterViewController *controller = (MLGMasterViewController *) navigationController.topViewController;
+    NSArray *fetchedEvents = [[controller fetchedResultsController] fetchedObjects];
+    controller.activeTimerCount = 0;
+    for (TimerEvent *anEvent in fetchedEvents) {
+        if (anEvent.state == ACTIVE) {
+            controller.activeTimerCount++;
+        }
+    }
+    [UIApplication sharedApplication].applicationIconBadgeNumber = controller.activeTimerCount;
     [self saveContext];
     controller.pollingTimer = nil;
 }
