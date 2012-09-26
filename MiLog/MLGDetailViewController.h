@@ -11,9 +11,7 @@
 
 @class TimerEvent;
 
-@interface MLGDetailViewController : UIViewController <UISplitViewControllerDelegate, UITextFieldDelegate> {
-
-}
+@interface MLGDetailViewController : UIViewController <UISplitViewControllerDelegate, UITextFieldDelegate>
 
 
 
