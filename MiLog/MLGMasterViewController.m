@@ -21,14 +21,23 @@
 
 
 
-- (void)configureCell:(MLGTimerCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+//- (void)configureCell:(MLGTimerCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+
+- (void)tableView:(UITableView *)tableView configureCell:(MLGTimerCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+
 
 @end
 
 @implementation MLGMasterViewController
 
 
-#pragma mark - Set up view
+
+@synthesize searchResults;
+
+
+
+#pragma mark - 
+# pragma mark Set Up View
 
 - (void)awakeFromNib
 {
@@ -50,17 +59,21 @@
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (MLGDetailViewController *) [[self.splitViewController.viewControllers lastObject]
                                                                                                        topViewController];
+    self.searchResults = [NSMutableArray arrayWithCapacity:[[self.fetchedResultsController fetchedObjects] count]];
+
     if (self.pollingTimer == nil) {
         self.pollingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 / 10.0
                                                              target:self
                                                            selector:@selector(updateTimers)
                                                            userInfo:nil repeats:YES];
     }
+    [self.tableView reloadData];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    self.searchResults = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -80,25 +93,38 @@
     [self performSegueWithIdentifier:@"showDetail" sender:newManagedObject];
 }
 
-#pragma mark - Table View
+#pragma mark - 
+#pragma mark Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger count = [[self.fetchedResultsController sections] count];
-    if (count == 0) count = 1;
+    //if (count == 0) count = 1;
     return count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-    return [sectionInfo numberOfObjects];
+    if (tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        return [self.searchResults count];
+    }
+    else
+    {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+        return [sectionInfo numberOfObjects];
+    }
 }
 
 - (NSString *)tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger)section
 {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-    return [sectionInfo name];
+    if (aTableView == self.searchDisplayController.searchResultsTableView){
+        return @"Search Results";
+    }
+    else{
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+        return [sectionInfo name];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -108,8 +134,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MLGTimerCell *cell = (MLGTimerCell *) [tableView dequeueReusableCellWithIdentifier:@"TimerCell"];
-    [self configureCell:cell atIndexPath:indexPath];
+    static NSString *cellIdentifier = @"TimerCell";
+    MLGTimerCell *cell = (MLGTimerCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[MLGTimerCell alloc]
+                initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+
+    [self tableView:tableView configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
@@ -122,7 +154,7 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
         return @"Delete";
     }
     else {
-        return @"Delete";
+        return @"Archive";
     }
 }
 
@@ -189,13 +221,26 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     [[segue destinationViewController] setDetailItem:sender];
 }
 
-- (void)configureCell:(MLGTimerCell *)cell atIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView configureCell:(MLGTimerCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    TimerEvent *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    TimerEvent *event = nil;
+
+    if (tableView == self.searchDisplayController.searchResultsTableView)
+    {
+//        NSLog(@"Configuring cell to show search results");
+        event = [self.searchResults objectAtIndex:indexPath.row];
+    }
+    else
+    {
+//        NSLog(@"Configuring cell to show normal data");
+        event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    }
+
     [cell configureWithTimerEvent:event];
 }
 
-#pragma mark - Timer methods
+#pragma mark - 
+#pragma mark Timer Methods
 
 - (void)startTimerWithTimerEvent:(TimerEvent *)event
 {
@@ -206,6 +251,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)pauseTimerWithTimerEvent:(TimerEvent *)event
 {
     [event setElapsedForStopDate:[NSDate date] withState:PAUSE];
+    [self saveContext];
 }
 
 - (void)updateTimers
@@ -218,7 +264,47 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     }
 }
 
-#pragma mark - Fetched results controller
+#pragma mark -
+#pragma mark Content Filtering
+
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    NSLog(@"Previous Search Results were removed.");
+    [self.searchResults removeAllObjects];
+
+    for (TimerEvent *event in [self.fetchedResultsController fetchedObjects])
+    {
+        if ([scope isEqualToString:@"All"] || [event.name isEqualToString:scope])
+        {
+            NSComparisonResult result = [event.name compare:searchText
+                                                   options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch)
+                                                     range:NSMakeRange(0, [searchText length])];
+            if (result == NSOrderedSame)
+            {
+                NSLog(@"Adding event.name '%@' to searchResults as it begins with search text '%@'", event.name, searchText);
+                [self.searchResults addObject:event];
+            }
+        }
+    }
+}
+
+#pragma mark -
+#pragma mark UISearchDisplayController Delegate Methods
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString scope:@"All"];
+    return YES;
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
+{
+    [self filterContentForSearchText:[self.searchDisplayController.searchBar text] scope:@"All"];
+    return YES;
+}
+
+#pragma mark - 
+#pragma mark Fetched Results Controller
 
 - (NSFetchedResultsController *)fetchedResultsController
 {
@@ -295,13 +381,27 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
             break;
 
         case NSFetchedResultsChangeUpdate:
-            [self configureCell:(MLGTimerCell *) [tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [self tableView:tableView configureCell:(MLGTimerCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
 
         case NSFetchedResultsChangeMove:
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
+    }
+}
+
+- (void)saveContext
+{
+    NSError *error = nil;
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if (managedObjectContext != nil) {
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+
+            abort();
+        }
     }
 }
 

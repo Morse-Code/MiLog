@@ -11,8 +11,7 @@
 #import <CoreData/CoreData.h>
 #import "MLGDetailViewController.h"
 
-@interface MLGMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITableViewDelegate> {
-    NSDateFormatter *dateFormatter;
+@interface MLGMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate> {
 }
 
 
@@ -22,6 +21,7 @@
 @property(strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property(strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property(strong, nonatomic) NSTimer *pollingTimer;
+@property(nonatomic, retain) NSMutableArray *searchResults;
 
 - (void)startTimerWithTimerEvent:(TimerEvent *)event;
 
