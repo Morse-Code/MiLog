@@ -72,7 +72,7 @@
         self.pollingTimer = nil;
     }
     else if (self.pollingTimer == nil) {
-        self.pollingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 / 10.0
+        self.pollingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 / 2.0
                                                              target:self
                                                            selector:@selector(updateTimers)
                                                            userInfo:nil repeats:YES];
@@ -241,7 +241,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)startTimerWithTimerEvent:(TimerEvent *)event
 {
     if (self.pollingTimer == nil) {
-        self.pollingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 / 10.0
+        self.pollingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 / 2.0
                                                              target:self
                                                            selector:@selector(updateTimers)
                                                            userInfo:nil repeats:YES];

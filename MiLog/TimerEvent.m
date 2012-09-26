@@ -88,7 +88,7 @@
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:interval];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-    [dateFormatter setDateFormat:@"HH:mm:ss.SS"];
+    [dateFormatter setDateFormat:@"HH:mm:ss"];
     NSString *time = [dateFormatter stringFromDate:date];
     return time;
 }
