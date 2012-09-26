@@ -6,7 +6,13 @@
 //  Copyright (c) 2012 Christopher Morse. All rights reserved.
 //
 
+#define NEW 0
+#define ACTIVE 1
+#define PAUSE 2
+#define HISTORY 3
+
 #import "MLGTimerCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation MLGTimerCell
 
@@ -33,6 +39,21 @@
     self.startDate.text = [dateFormatter stringFromDate:[event start]];
     self.name.text = [[event name] description];
     self.timer.text = [event timeString];
+    self.timer.layer.cornerRadius = 4;
+    if (event.state == ACTIVE){
+//        self.timer.backgroundColor = [UIColor ];
+        self.timer.textColor = [UIColor colorWithRed:0.24 green:0.85 blue:1.0 alpha:1];
+    }
+    else if (event.state == HISTORY) {
+//        self.timer.textColor = [UIColor colorWithRed:62 green:218 blue:255 alpha:1];
+        self.name.textColor =[UIColor grayColor];
+        self.timer.textColor = [UIColor grayColor];
+        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    }
+    else {
+        self.timer.textColor = [UIColor colorWithRed:1.0 green:0.05 blue:0.15 alpha:1];
+    }
+
 }
 
 @end

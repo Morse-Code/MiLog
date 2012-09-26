@@ -88,7 +88,7 @@
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:interval];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-    [dateFormatter setDateFormat:@"HH:mm:ss.SSS"];
+    [dateFormatter setDateFormat:@"HH:mm:ss.SS"];
     NSString *time = [dateFormatter stringFromDate:date];
     return time;
 }
@@ -96,13 +96,13 @@
 - (void)setElapsedForStopDate:(NSDate *)date
                     withState:(int16_t)state
 {
-    if (state == HISTORY) {
+    self.state = state;
+    if (self.state == HISTORY) {
         self.sectionName = @"History";
     }
     else {
         self.sectionName = @"Active Timers";
     }
-    self.state = state;
     self.stop = date;
     self.elapsed = [self setTimeIntervalToDate:date];
 }
