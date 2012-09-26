@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0789643716135FAC007035C9 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0789643616135FAC007035C9 /* Icon@2x.png */; };
+		0789643A16135FAF007035C9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0789643916135FAF007035C9 /* Icon.png */; };
 		078F7A22160E246200F817FA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078F7A21160E246200F817FA /* Default-568h@2x.png */; };
 		078F7A26160E269300F817FA /* MLGTimerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F7A25160E269300F817FA /* MLGTimerCell.m */; };
 		078F7A31160E43E700F817FA /* TimerEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F7A30160E43E700F817FA /* TimerEvent.m */; };
@@ -42,6 +44,8 @@
 
 /* Begin PBXFileReference section */
 		076D84E0160D6E81005AF996 /* MiLog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MiLog.entitlements; sourceTree = "<group>"; };
+		0789643616135FAC007035C9 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		0789643916135FAF007035C9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		078F7A21160E246200F817FA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		078F7A24160E269300F817FA /* MLGTimerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLGTimerCell.h; sourceTree = "<group>"; };
 		078F7A25160E269300F817FA /* MLGTimerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLGTimerCell.m; sourceTree = "<group>"; };
@@ -136,6 +140,8 @@
 		07CA01F715EEC15F00753BB1 = {
 			isa = PBXGroup;
 			children = (
+				0789643916135FAF007035C9 /* Icon.png */,
+				0789643616135FAC007035C9 /* Icon@2x.png */,
 				078F7A21160E246200F817FA /* Default-568h@2x.png */,
 				07CA020E15EEC15F00753BB1 /* MiLog */,
 				07CA023615EEC15F00753BB1 /* MiLogTests */,
@@ -283,6 +289,8 @@
 				07CA021C15EEC15F00753BB1 /* MainStoryboard_iPhone.storyboard in Resources */,
 				07CA021F15EEC15F00753BB1 /* MainStoryboard_iPad.storyboard in Resources */,
 				078F7A22160E246200F817FA /* Default-568h@2x.png in Resources */,
+				0789643716135FAC007035C9 /* Icon@2x.png in Resources */,
+				0789643A16135FAF007035C9 /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
