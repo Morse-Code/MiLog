@@ -40,13 +40,12 @@
     self.name.text = [[event name] description];
     self.timer.text = [event timeString];
     self.timer.layer.cornerRadius = 4;
-    if (event.state == ACTIVE){
-//        self.timer.backgroundColor = [UIColor ];
+    self.name.textColor = [UIColor colorWithRed:0.18 green:0.37 blue:0.47 alpha:1];
+    if (event.state == ACTIVE) {
         self.timer.textColor = [UIColor colorWithRed:0.24 green:0.85 blue:1.0 alpha:1];
     }
     else if (event.state == HISTORY) {
-//        self.timer.textColor = [UIColor colorWithRed:62 green:218 blue:255 alpha:1];
-        self.name.textColor =[UIColor grayColor];
+        self.name.textColor = [UIColor grayColor];
         self.timer.textColor = [UIColor grayColor];
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
