@@ -23,13 +23,21 @@
 
 - (void)configureCell:(MLGTimerCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
+
 @end
 
 @implementation MLGMasterViewController
 
 
-#pragma mark - Set up view
+
+@synthesize pollingTimer = _pollingTimer;
 @synthesize activeTimerCount = _activeTimerCount;
+
+
+
+
+#pragma mark -
+# pragma mark Set Up View
 
 - (void)awakeFromNib
 {
@@ -51,20 +59,32 @@
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (MLGDetailViewController *) [[self.splitViewController.viewControllers lastObject]
                                                                                                        topViewController];
-    if (self.pollingTimer == nil) {
     self.activeTimerCount = 0;
+    NSArray *fetchedEvents = [[self fetchedResultsController] fetchedObjects];
+    BOOL activeTimers = FALSE;
+    for (TimerEvent *anEvent in fetchedEvents) {
+        if (anEvent.state == ACTIVE) {
+            activeTimers = TRUE;
             self.activeTimerCount++;
+        }
+    }
+    if (!activeTimers) {
+        self.pollingTimer = nil;
+    }
+    else if (self.pollingTimer == nil) {
         self.pollingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 / 10.0
                                                              target:self
                                                            selector:@selector(updateTimers)
                                                            userInfo:nil repeats:YES];
     }
     [UIApplication sharedApplication].applicationIconBadgeNumber = self.activeTimerCount;
+    [self.tableView reloadData];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -84,12 +104,12 @@
     [self performSegueWithIdentifier:@"showDetail" sender:newManagedObject];
 }
 
-#pragma mark - Table View
+#pragma mark -
+#pragma mark Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger count = [[self.fetchedResultsController sections] count];
-    if (count == 0) count = 1;
     return count;
 }
 
@@ -112,7 +132,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MLGTimerCell *cell = (MLGTimerCell *) [tableView dequeueReusableCellWithIdentifier:@"TimerCell"];
+    static NSString *cellIdentifier = @"TimerCell";
+    MLGTimerCell *cell = (MLGTimerCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[MLGTimerCell alloc]
+                              initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
@@ -126,7 +151,7 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
         return @"Delete";
     }
     else {
-        return @"Delete";
+        return @"Archive";
     }
 }
 
@@ -149,6 +174,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
             event.sectionName = @"History";
         }
         NSError *error = nil;
+
         if (![context save:&error]) {
 
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -160,12 +186,13 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // The table view should not be re-orderable.
     return NO;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         TimerEvent *event = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         self.detailViewController.detailItem = event;
@@ -193,36 +220,70 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     [[segue destinationViewController] setDetailItem:sender];
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell
+forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ((indexPath.row + (indexPath.section % 2)) % 2 == 0) {
+        cell.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1];
+    }
+}
+
 - (void)configureCell:(MLGTimerCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
+
     TimerEvent *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [cell configureWithTimerEvent:event];
 }
 
-#pragma mark - Timer methods
+#pragma mark -
+#pragma mark Timer Methods
 
 - (void)startTimerWithTimerEvent:(TimerEvent *)event
 {
+    if (self.pollingTimer == nil) {
+        self.pollingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 / 10.0
+                                                             target:self
+                                                           selector:@selector(updateTimers)
+                                                           userInfo:nil repeats:YES];
+        NSLog(@"Polling timer created");
+    }
     event.start = [NSDate date];
     event.state = ACTIVE;
 }
 
 - (void)pauseTimerWithTimerEvent:(TimerEvent *)event
 {
+    NSArray *fetchedEvents = [[self fetchedResultsController] fetchedObjects];
+    BOOL activeTimers = FALSE;
+    for (TimerEvent *anEvent in fetchedEvents) {
+        if (anEvent.state == ACTIVE) {
+            activeTimers = TRUE;
+        }
+    }
+    if (!activeTimers) {
+        self.pollingTimer = nil;
+    }
     [event setElapsedForStopDate:[NSDate date] withState:PAUSE];
+    [self saveContext];
 }
 
 - (void)updateTimers
 {
     NSArray *fetchedEvents = [[self fetchedResultsController] fetchedObjects];
+    BOOL activeTimers = FALSE;
     for (TimerEvent *event in fetchedEvents) {
         if (event.state == ACTIVE) {
+            activeTimers = TRUE;
             [event setTimeIntervalToDate:[NSDate date]];
         }
     }
+    if (!activeTimers && self.pollingTimer != nil) {
+        self.pollingTimer = nil;
+    }
 }
 
-#pragma mark - Fetched results controller
+#pragma mark -
+#pragma mark Fetched Results Controller
 
 - (NSFetchedResultsController *)fetchedResultsController
 {
@@ -306,6 +367,20 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
+    }
+}
+
+- (void)saveContext
+{
+    NSError *error = nil;
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if (managedObjectContext != nil) {
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+
+            abort();
+        }
     }
 }
 
