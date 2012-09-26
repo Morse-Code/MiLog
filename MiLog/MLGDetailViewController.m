@@ -44,6 +44,9 @@
     if (self.detailItem) {
         self.name.text = self.detailItem.name;
         self.note.text = self.detailItem.note;
+        if ([self.name.text isEqual:@"Untitled Event"]){
+            [self.name selectAll:self];
+        }
     }
 }
 
