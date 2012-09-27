@@ -16,7 +16,6 @@
 @interface TimerEvent ()
 
 
-
 @property(nonatomic) NSTimeInterval elapsedAlias;
 
 - (NSString *)timeStringForInterval:(NSTimeInterval)interval;
@@ -24,7 +23,6 @@
 @end
 
 @implementation TimerEvent
-
 
 
 @dynamic name;
@@ -38,8 +36,7 @@
 @dynamic sectionName;
 
 
-+ (TimerEvent *)addEventToContext:(NSManagedObjectContext *)context
-{
++ (TimerEvent *)addEventToContext:(NSManagedObjectContext *)context {
     NSEntityDescription *entity = [NSEntityDescription entityForName:[TimerEvent entityName]
                                               inManagedObjectContext:context];
     NSAssert1(entity != nil, @"The entity description for TimerEvent in %@ is nil", context);
@@ -59,32 +56,27 @@
     return entry;
 }
 
-+ (NSString *)entityName
-{
++ (NSString *)entityName {
     return @"TimerEvent";
 }
 
 
-- (void)setElapsed:(NSTimeInterval)interval
-{
+- (void)setElapsed:(NSTimeInterval)interval {
     self.elapsedAlias = interval;
 }
 
-- (NSTimeInterval)elapsed
-{
+- (NSTimeInterval)elapsed {
     return self.elapsedAlias;
 }
 
-- (NSTimeInterval)setTimeIntervalToDate:(NSDate *)date
-{
+- (NSTimeInterval)setTimeIntervalToDate:(NSDate *)date {
     NSTimeInterval interval = [date timeIntervalSinceDate:self.start];
     interval += self.elapsed;
     self.timeString = [self timeStringForInterval:interval];
     return interval;
 }
 
-- (NSString *)timeStringForInterval:(NSTimeInterval)interval
-{
+- (NSString *)timeStringForInterval:(NSTimeInterval)interval {
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:interval];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
@@ -94,17 +86,26 @@
 }
 
 - (void)setElapsedForStopDate:(NSDate *)date
-                    withState:(int16_t)state
-{
+                    withState:(int16_t)state {
     self.state = state;
     if (self.state == HISTORY) {
         self.sectionName = @"History";
+        self.stop = date;
+        self.elapsed = [self setTimeIntervalToDate:date];
+    }
+    else if (self.state == NEW) {
+        self.timeStamp = nil;
+        self.elapsed = 0.0;
+        self.stop = nil;
+        self.timeString = [self timeStringForInterval:self.elapsed];
+        self.sectionName = @"Active Timers";
     }
     else {
         self.sectionName = @"Active Timers";
+        self.stop = date;
+        self.elapsed = [self setTimeIntervalToDate:date];
     }
-    self.stop = date;
-    self.elapsed = [self setTimeIntervalToDate:date];
+
 }
 
 @end

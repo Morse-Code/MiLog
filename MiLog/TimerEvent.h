@@ -13,7 +13,6 @@
 @interface TimerEvent : NSManagedObject
 
 
-
 @property(nonatomic, retain) NSString *name;
 @property(nonatomic, retain) NSString *note;
 @property(nonatomic, retain) NSString *timeString;
@@ -24,13 +23,16 @@
 @property(nonatomic) NSTimeInterval elapsed;
 @property(nonatomic, retain) NSString *sectionName;
 
-
+//Convenience method for adding the recieving entity to the passed ManagedObjectContext
 + (TimerEvent *)addEventToContext:(NSManagedObjectContext *)context;
 
+////Convenience method to return the string name of the entity.
 + (NSString *)entityName;
 
+//Convenience method for setting entity properties using a passed date.
 - (NSTimeInterval)setTimeIntervalToDate:(NSDate *)date;
 
+//Convenience method for setting entity properties using a passed date and state {NEW, ACTIVE, PAUSED, HISTORY}
 - (void)setElapsedForStopDate:(NSDate *)date
                     withState:(int16_t)state;
 
