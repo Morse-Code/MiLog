@@ -159,7 +159,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
             [context deleteObject:event];
         }
         else {
-            [event setElapsedForStopDate:[NSDate date] withState:NEW];
+            [event resetTimer];
         }
         NSError *error = nil;
 

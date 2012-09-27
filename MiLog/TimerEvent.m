@@ -42,7 +42,7 @@
     NSAssert1(entity != nil, @"The entity description for TimerEvent in %@ is nil", context);
     TimerEvent *entry = [[TimerEvent alloc] initWithEntity:entity
                             insertIntoManagedObjectContext:context];
-    entry.timeStamp = [NSDate date];
+    entry.timeStamp = nil;
     entry.state = NEW;
     entry.elapsed = 0.0;
     entry.stop = nil;
@@ -70,6 +70,7 @@
 }
 
 - (NSTimeInterval)setTimeIntervalToDate:(NSDate *)date {
+    if (self.timeStamp == nil) self.timeStamp = self.start;
     NSTimeInterval interval = [date timeIntervalSinceDate:self.start];
     interval += self.elapsed;
     self.timeString = [self timeStringForInterval:interval];
@@ -93,19 +94,30 @@
         self.stop = date;
         self.elapsed = [self setTimeIntervalToDate:date];
     }
-    else if (self.state == NEW) {
-        self.timeStamp = nil;
-        self.elapsed = 0.0;
-        self.stop = nil;
-        self.timeString = [self timeStringForInterval:self.elapsed];
-        self.sectionName = @"Active Timers";
-    }
     else {
         self.sectionName = @"Active Timers";
         self.stop = date;
         self.elapsed = [self setTimeIntervalToDate:date];
     }
+    NSError *error = nil;
+    if (![self.managedObjectContext save:&error]) {
+        [NSException raise:NSInternalInconsistencyException format:@"An error occured when saving the context: %@",
+         [error localizedDescription]];
+    }
 
+}
+
+- (void)resetTimer{
+    self.state = NEW;
+    self.timeStamp = nil;
+    self.elapsed = 0.0;
+    self.stop = nil;
+    self.timeString = [self timeStringForInterval:self.elapsed];
+    NSError *error = nil;
+    if (![self.managedObjectContext save:&error]) {
+        [NSException raise:NSInternalInconsistencyException format:@"An error occured when saving the context: %@",
+         [error localizedDescription]];
+    }
 }
 
 @end

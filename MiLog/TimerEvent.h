@@ -36,4 +36,7 @@
 - (void)setElapsedForStopDate:(NSDate *)date
                     withState:(int16_t)state;
 
+- (void)resetTimer;
+
+
 @end

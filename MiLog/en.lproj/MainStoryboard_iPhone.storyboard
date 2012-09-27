@@ -46,17 +46,25 @@
                                             <size key="shadowOffset" width="0.0" height="1"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Untitled Event" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" id="8LA-u8-ZC4">
-                                            <rect key="frame" x="20" y="20" width="133" height="29"/>
+                                            <rect key="frame" x="20" y="11" width="133" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="0.13824176790000001" green="0.294534564" blue="0.39927983280000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sep 22, 2012" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wUp-FE-lhD">
-                                            <rect key="frame" x="20" y="57" width="113" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sep 22, 2012" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wUp-FE-lhD">
+                                            <rect key="frame" x="20" y="57" width="133" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <gestureRecognizers/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                            <color key="textColor" red="0.47767823929999997" green="0.56875503059999999" blue="0.62275922299999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="10:30 am" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S4A-lK-apJ">
+                                            <rect key="frame" x="20" y="39" width="133" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <gestureRecognizers/>
+                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                                             <color key="textColor" red="0.47767823929999997" green="0.56875503059999999" blue="0.62275922299999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
@@ -67,6 +75,7 @@
                                 <connections>
                                     <outlet property="name" destination="8LA-u8-ZC4" id="6oD-TG-gi2"/>
                                     <outlet property="startDate" destination="wUp-FE-lhD" id="69a-Z5-bQs"/>
+                                    <outlet property="startTime" destination="S4A-lK-apJ" id="79G-mU-y4j"/>
                                     <outlet property="timer" destination="gzf-3E-zMx" id="oMn-BS-YAJ"/>
                                 </connections>
                             </tableViewCell>
@@ -164,6 +173,7 @@
             <relationships>
                 <relationship kind="outlet" name="name" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="startDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="startTime" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="timer" candidateClass="UILabel"/>
             </relationships>
         </class>
