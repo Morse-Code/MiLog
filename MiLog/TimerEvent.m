@@ -91,6 +91,7 @@
     self.state = state;
     if (self.state == HISTORY) {
         self.sectionName = @"History";
+        self.start = nil;
         self.stop = date;
         self.elapsed = [self setTimeIntervalToDate:date];
     }
@@ -99,12 +100,6 @@
         self.stop = date;
         self.elapsed = [self setTimeIntervalToDate:date];
     }
-    NSError *error = nil;
-    if (![self.managedObjectContext save:&error]) {
-        [NSException raise:NSInternalInconsistencyException format:@"An error occured when saving the context: %@",
-         [error localizedDescription]];
-    }
-
 }
 
 - (void)resetTimer{
@@ -112,12 +107,8 @@
     self.timeStamp = nil;
     self.elapsed = 0.0;
     self.stop = nil;
+    self.sectionName = @"Active Timers";
     self.timeString = [self timeStringForInterval:self.elapsed];
-    NSError *error = nil;
-    if (![self.managedObjectContext save:&error]) {
-        [NSException raise:NSInternalInconsistencyException format:@"An error occured when saving the context: %@",
-         [error localizedDescription]];
-    }
 }
 
 @end
