@@ -43,6 +43,8 @@
     if (self.detailItem) {
         self.name.text = self.detailItem.name;
         self.note.text = self.detailItem.note;
+        [self.name.layer setCornerRadius:4];
+        self.note.layer.cornerRadius = 4;
         self.archiveButton.layer.cornerRadius = 4;
         if ([self.name.text isEqual:@"Untitled Event"]) {
             [self.name selectAll:self];
