@@ -15,6 +15,7 @@
 
 @property(weak, nonatomic) IBOutlet UILabel *name;
 @property(weak, nonatomic) IBOutlet UILabel *startDate;
+@property(weak, nonatomic) IBOutlet UILabel *startTime;
 @property(weak, nonatomic) IBOutlet UILabel *timer;
 
 - (void)configureWithTimerEvent:(TimerEvent *)event;

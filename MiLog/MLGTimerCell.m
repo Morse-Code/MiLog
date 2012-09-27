@@ -18,6 +18,10 @@
 
 
 @synthesize name, timer, startDate;
+@synthesize startTime = _startTime;
+
+static NSDateFormatter *dateFormatter = nil;
+static NSDateFormatter *timeFormatter = nil;
 
 - (id)initWithStyle:(UITableViewCellStyle)style
     reuseIdentifier:(NSString *)reuseIdentifier {
@@ -32,9 +36,19 @@
 }
 
 - (void)configureWithTimerEvent:(TimerEvent *)event {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    self.startDate.text = [dateFormatter stringFromDate:[event start]];
+    if (dateFormatter == nil) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    }
+    if (timeFormatter == nil) {
+        timeFormatter = [[NSDateFormatter alloc] init];
+        [timeFormatter setDateStyle:NSDateFormatterNoStyle];
+        [timeFormatter setTimeStyle:NSDateFormatterShortStyle];
+    }
+
+    self.startDate.text = [dateFormatter stringFromDate:event.timeStamp];
+    self.startTime.text = [timeFormatter stringFromDate:event.timeStamp];
     self.name.text = [[event name] description];
     self.timer.text = [event timeString];
     self.timer.layer.cornerRadius = 4;
