@@ -14,14 +14,18 @@
 @interface MLGDetailViewController : UIViewController <UISplitViewControllerDelegate, UITextFieldDelegate>
 
 
-
 @property(strong, nonatomic) TimerEvent *detailItem;
 
 @property(weak, nonatomic) IBOutlet UITextField *name;
 @property(weak, nonatomic) IBOutlet UITextView *note;
+@property(weak, nonatomic) IBOutlet UIButton *archiveButton;
 
+//Saves modified name and note fields to NSManagedObjectContext.
 - (void)save;
 
+//Effectively discards any changes to name and note fields and saves the NSManagedObjectContext.
 - (void)cancel;
+
+- (IBAction)pressedArchiveButton:(UIButton *)button;
 
 @end

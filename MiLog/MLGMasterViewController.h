@@ -14,7 +14,6 @@
 @interface MLGMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITableViewDelegate>
 
 
-
 @property(strong, nonatomic) MLGDetailViewController *detailViewController;
 
 @property(strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
