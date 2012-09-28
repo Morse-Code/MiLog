@@ -30,6 +30,7 @@
 		07CA023315EEC15F00753BB1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CA020C15EEC15F00753BB1 /* CoreData.framework */; };
 		07CA023B15EEC15F00753BB1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07CA023915EEC15F00753BB1 /* InfoPlist.strings */; };
 		07CA023E15EEC15F00753BB1 /* MiLogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CA023D15EEC15F00753BB1 /* MiLogTests.m */; };
+		49ED6DA07D2FE86CE16CC34E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49ED668CC88D1BE0C8FFD4ED /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		07CA023A15EEC15F00753BB1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		07CA023C15EEC15F00753BB1 /* MiLogTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MiLogTests.h; sourceTree = "<group>"; };
 		07CA023D15EEC15F00753BB1 /* MiLogTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiLogTests.m; sourceTree = "<group>"; };
+		49ED668CC88D1BE0C8FFD4ED /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 		07CA020F15EEC15F00753BB1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				49ED668CC88D1BE0C8FFD4ED /* Localizable.strings */,
 				076D84E0160D6E81005AF996 /* MiLog.entitlements */,
 				07CA021015EEC15F00753BB1 /* MiLog-Info.plist */,
 				07CA021115EEC15F00753BB1 /* InfoPlist.strings */,
@@ -291,6 +294,7 @@
 				078F7A22160E246200F817FA /* Default-568h@2x.png in Resources */,
 				0789643716135FAC007035C9 /* Icon@2x.png in Resources */,
 				0789643A16135FAF007035C9 /* Icon.png in Resources */,
+				49ED6DA07D2FE86CE16CC34E /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
