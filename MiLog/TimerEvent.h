@@ -13,6 +13,7 @@
 @interface TimerEvent : NSManagedObject
 
 
+
 @property(nonatomic, retain) NSString *name;
 @property(nonatomic, retain) NSString *note;
 @property(nonatomic, retain) NSString *timeString;

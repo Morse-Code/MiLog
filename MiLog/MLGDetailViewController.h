@@ -14,6 +14,7 @@
 @interface MLGDetailViewController : UIViewController <UISplitViewControllerDelegate, UITextFieldDelegate>
 
 
+
 @property(strong, nonatomic) TimerEvent *detailItem;
 
 @property(weak, nonatomic) IBOutlet UITextField *name;

@@ -17,6 +17,7 @@
 @implementation MLGTimerCell
 
 
+
 @synthesize name, timer, startDate;
 @synthesize startTime = _startTime;
 
@@ -24,18 +25,21 @@ static NSDateFormatter *dateFormatter = nil;
 static NSDateFormatter *timeFormatter = nil;
 
 - (id)initWithStyle:(UITableViewCellStyle)style
-    reuseIdentifier:(NSString *)reuseIdentifier {
+    reuseIdentifier:(NSString *)reuseIdentifier
+{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
 
     return self;
 }
 
 - (void)setSelected:(BOOL)selected
-           animated:(BOOL)animated {
+           animated:(BOOL)animated
+{
     [super setSelected:selected animated:animated];
 }
 
-- (void)configureWithTimerEvent:(TimerEvent *)event {
+- (void)configureWithTimerEvent:(TimerEvent *)event
+{
     if (dateFormatter == nil) {
         dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];

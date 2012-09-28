@@ -17,6 +17,7 @@
 @interface MLGDetailViewController ()
 
 
+
 @property(strong, nonatomic) UIPopoverController *masterPopoverController;
 
 - (void)configureView;
@@ -27,7 +28,8 @@
 #pragma mark -
 #pragma mark Managing the Detail Item
 
-- (void)setDetailItem:(id)newDetailItem {
+- (void)setDetailItem:(id)newDetailItem
+{
     if (_detailItem != newDetailItem) {
         _detailItem = newDetailItem;
 
@@ -39,7 +41,8 @@
     }
 }
 
-- (void)configureView {
+- (void)configureView
+{
     if (self.detailItem) {
         self.name.text = self.detailItem.name;
         self.note.text = self.detailItem.note;
@@ -61,7 +64,8 @@
 #pragma mark -
 #pragma mark Setting up the view
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                   target:self action:@selector(cancel)];
@@ -74,11 +78,13 @@
     [self configureView];
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
     }
@@ -90,7 +96,8 @@
 #pragma mark -
 #pragma mark  Save and Cancel
 
-- (void)save {
+- (void)save
+{
 
     self.detailItem.name = self.name.text;
     self.detailItem.note = self.note.text;
@@ -106,7 +113,8 @@
 
 }
 
-- (void)cancel {
+- (void)cancel
+{
 
     if (self.detailItem.state == NEW) {
         [self.detailItem.managedObjectContext deleteObject:self.detailItem];
@@ -123,7 +131,8 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)pressedArchiveButton:(UIButton *)button {
+- (IBAction)pressedArchiveButton:(UIButton *)button
+{
     if (self.detailItem.state == HISTORY) {
         [self.detailItem.managedObjectContext deleteObject:self.detailItem];
     }
@@ -140,7 +149,8 @@
 - (void)splitViewController:(UISplitViewController *)splitController
      willHideViewController:(UIViewController *)viewController
           withBarButtonItem:(UIBarButtonItem *)barButtonItem
-       forPopoverController:(UIPopoverController *)popoverController {
+       forPopoverController:(UIPopoverController *)popoverController
+{
     barButtonItem.title = NSLocalizedString(@"Master", @"Master");
     [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
     self.masterPopoverController = popoverController;
@@ -148,7 +158,8 @@
 
 - (void)splitViewController:(UISplitViewController *)splitController
      willShowViewController:(UIViewController *)viewController
-  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem {
+  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     self.masterPopoverController = nil;
 }
@@ -156,7 +167,8 @@
 #pragma mark -
 #pragma mark UITextField Delegate Methods
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
 
     [textField resignFirstResponder];
     return YES;
