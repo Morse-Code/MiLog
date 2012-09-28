@@ -98,8 +98,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if (tableView == self.searchDisplayController.searchResultsTableView){
+        return 1;
+    }
     NSInteger count = [[self.fetchedResultsController sections] count];
-    //if (count == 0) count = 1;
     return count;
 }
 
@@ -111,15 +113,14 @@
     }
     else
     {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-        return [sectionInfo numberOfObjects];
+        return [[[self.fetchedResultsController sections] objectAtIndex:section] numberOfObjects];
     }
 }
 
 - (NSString *)tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger)section
 {
     if (aTableView == self.searchDisplayController.searchResultsTableView){
-        return @"Search Results";
+        return nil;
     }
     else{
         id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
@@ -135,12 +136,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"TimerCell";
-    MLGTimerCell *cell = (MLGTimerCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    MLGTimerCell *cell = (MLGTimerCell *) [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[MLGTimerCell alloc]
                 initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-
+//    if (tableView == self.searchDisplayController.searchResultsTableView) {
+//        TimerEvent *event = [self.searchResults objectAtIndex:indexPath.row];
+//        cell.name.text = event.name;
+//        cell.timer.text = event.elapsed
+//        cell.startDate
+//    }
     [self tableView:tableView configureCell:cell atIndexPath:indexPath];
     return cell;
 }
@@ -250,7 +256,18 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (void)pauseTimerWithTimerEvent:(TimerEvent *)event
 {
+    NSArray *fetchedEvents = [[self fetchedResultsController] fetchedObjects];
+    BOOL activeTimers = FALSE;
+    for (TimerEvent *anEvent in fetchedEvents) {
+        if (anEvent.state == ACTIVE) {
+            activeTimers = TRUE;
+        }
+    }
+    if (!activeTimers) {
+        self.pollingTimer = nil;
+    }
     [event setElapsedForStopDate:[NSDate date] withState:PAUSE];
+
     [self saveContext];
 }
 
@@ -319,7 +336,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 
     [fetchRequest setFetchBatchSize:20];
 
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
     NSArray *sortDescriptors = @[sortDescriptor];
 
     [fetchRequest setSortDescriptors:sortDescriptors];
