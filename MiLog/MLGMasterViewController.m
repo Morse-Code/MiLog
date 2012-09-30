@@ -18,9 +18,9 @@
 @interface MLGMasterViewController ()
 
 
-- (void)tableView:(UITableView *) tableView
-    configureCell:(MLGTimerCell *) cell
-      atIndexPath:(NSIndexPath *) indexPath;
+- (void)tableView:(UITableView *)tableView
+    configureCell:(MLGTimerCell *)cell
+      atIndexPath:(NSIndexPath *)indexPath;
 
 
 @end
@@ -91,7 +91,7 @@
 }
 
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
@@ -105,7 +105,7 @@
 #pragma mark -
 #pragma mark TimerEvent support
 
-- (void)insertNewObject:(id) sender
+- (void)insertNewObject:(id)sender
 {
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     TimerEvent *newManagedObject = [TimerEvent addEventToContext:context];
@@ -115,7 +115,7 @@
 #pragma mark -
 #pragma mark Timer Methods
 
-- (void)startTimerWithTimerEvent:(TimerEvent *) event
+- (void)startTimerWithTimerEvent:(TimerEvent *)event
 {
     if (self.pollingTimer == nil) {
         self.pollingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 / 2.0 target:self
@@ -127,7 +127,7 @@
 }
 
 
-- (void)pauseTimerWithTimerEvent:(TimerEvent *) event
+- (void)pauseTimerWithTimerEvent:(TimerEvent *)event
 {
     NSArray *fetchedEvents = [[self fetchedResultsController] fetchedObjects];
     BOOL activeTimers = FALSE;
@@ -162,7 +162,7 @@
 #pragma mark -
 #pragma mark Table View
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *) tableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         return 1;
@@ -174,8 +174,8 @@
 }
 
 
-- (NSInteger)tableView:(UITableView *) tableView
- numberOfRowsInSection:(NSInteger) section
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
 {
 
     return tableView == self.searchDisplayController.searchResultsTableView ? ([self.searchResults count])
@@ -183,8 +183,8 @@
 }
 
 
-- (NSString *)tableView:(UITableView *) aTableView
-titleForHeaderInSection:(NSInteger) section
+- (NSString *)tableView:(UITableView *)aTableView
+titleForHeaderInSection:(NSInteger)section
 {
     if (aTableView == self.searchDisplayController.searchResultsTableView) {
         return nil;
@@ -198,15 +198,15 @@ titleForHeaderInSection:(NSInteger) section
 }
 
 
-- (CGFloat)   tableView:(UITableView *) tableView
-heightForRowAtIndexPath:(NSIndexPath *) indexPath
+- (CGFloat)   tableView:(UITableView *)tableView
+heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 102;
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *) tableView
-         cellForRowAtIndexPath:(NSIndexPath *) indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"TimerCell";
     MLGTimerCell *cell = (MLGTimerCell *)[self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -218,9 +218,9 @@ heightForRowAtIndexPath:(NSIndexPath *) indexPath
 }
 
 
-- (void)tableView:(UITableView *) tableView
-    configureCell:(MLGTimerCell *) cell
-      atIndexPath:(NSIndexPath *) indexPath
+- (void)tableView:(UITableView *)tableView
+    configureCell:(MLGTimerCell *)cell
+      atIndexPath:(NSIndexPath *)indexPath
 {
     TimerEvent *event = nil;
 
@@ -239,8 +239,8 @@ heightForRowAtIndexPath:(NSIndexPath *) indexPath
 }
 
 
-- (NSString *)                          tableView:(UITableView *) tableView
-titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *) indexPath
+- (NSString *)                          tableView:(UITableView *)tableView
+titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TimerEvent *event = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     if ([event state] == HISTORY || [event state] == NEW) {
@@ -254,16 +254,16 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *) indexPath
 }
 
 
-- (BOOL)    tableView:(UITableView *) tableView
-canEditRowAtIndexPath:(NSIndexPath *) indexPath
+- (BOOL)    tableView:(UITableView *)tableView
+canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
 }
 
 
-- (void) tableView:(UITableView *) tableView
-commitEditingStyle:(UITableViewCellEditingStyle) editingStyle
- forRowAtIndexPath:(NSIndexPath *) indexPath
+- (void) tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+ forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     TimerEvent *event = [[self fetchedResultsController] objectAtIndexPath:indexPath];
@@ -287,15 +287,15 @@ commitEditingStyle:(UITableViewCellEditingStyle) editingStyle
 }
 
 
-- (BOOL)    tableView:(UITableView *) tableView
-canMoveRowAtIndexPath:(NSIndexPath *) indexPath
+- (BOOL)    tableView:(UITableView *)tableView
+canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return NO;
 }
 
 
-- (void)      tableView:(UITableView *) tableView
-didSelectRowAtIndexPath:(NSIndexPath *) indexPath
+- (void)      tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
 
@@ -317,24 +317,24 @@ didSelectRowAtIndexPath:(NSIndexPath *) indexPath
 }
 
 
-- (void)                       tableView:(UITableView *) tableView
-accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *) indexPath
+- (void)                       tableView:(UITableView *)tableView
+accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
     TimerEvent *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     [self performSegueWithIdentifier:@"showDetail" sender:object];
 }
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *) segue
-                 sender:(id) sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue
+                 sender:(id)sender
 {
     [[segue destinationViewController] setDetailItem:sender];
 }
 
 
-- (void)tableView:(UITableView *) tableView
-  willDisplayCell:(UITableViewCell *) cell
-forRowAtIndexPath:(NSIndexPath *) indexPath
+- (void)tableView:(UITableView *)tableView
+  willDisplayCell:(UITableViewCell *)cell
+forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ((indexPath.row + (indexPath.section % 2)) % 2 == 0) {
         cell.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1];
@@ -345,8 +345,8 @@ forRowAtIndexPath:(NSIndexPath *) indexPath
 #pragma mark -
 #pragma mark Content Filtering
 
-- (void)filterContentForSearchText:(NSString *) searchText
-                             scope:(NSString *) scope
+- (void)filterContentForSearchText:(NSString *)searchText
+                             scope:(NSString *)scope
 {
     NSLog(@"Previous Search Results were removed.");
     [self.searchResults removeAllObjects];
@@ -369,16 +369,16 @@ forRowAtIndexPath:(NSIndexPath *) indexPath
 #pragma mark -
 #pragma mark UISearchDisplayController Delegate Methods
 
-- (BOOL) searchDisplayController:(UISearchDisplayController *) controller
-shouldReloadTableForSearchString:(NSString *) searchString
+- (BOOL) searchDisplayController:(UISearchDisplayController *)controller
+shouldReloadTableForSearchString:(NSString *)searchString
 {
     [self filterContentForSearchText:searchString scope:@"All"];
     return YES;
 }
 
 
-- (BOOL)searchDisplayController:(UISearchDisplayController *) controller
-shouldReloadTableForSearchScope:(NSInteger) searchOption
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller
+shouldReloadTableForSearchScope:(NSInteger)searchOption
 {
     [self filterContentForSearchText:[self.searchDisplayController.searchBar text] scope:@"All"];
     return YES;
@@ -399,7 +399,7 @@ shouldReloadTableForSearchScope:(NSInteger) searchOption
                                               inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
 
-    [fetchRequest setFetchBatchSize:20];
+    [fetchRequest setFetchBatchSize:30];
 
     NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"sectionName" ascending:YES];
     NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"state" ascending:YES];
@@ -428,16 +428,16 @@ shouldReloadTableForSearchScope:(NSInteger) searchOption
 }
 
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *) controller
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView beginUpdates];
 }
 
 
-- (void)controller:(NSFetchedResultsController *) controller
-  didChangeSection:(id < NSFetchedResultsSectionInfo >) sectionInfo
-           atIndex:(NSUInteger) sectionIndex
-     forChangeType:(NSFetchedResultsChangeType) type
+- (void)controller:(NSFetchedResultsController *)controller
+  didChangeSection:(id < NSFetchedResultsSectionInfo >)sectionInfo
+           atIndex:(NSUInteger)sectionIndex
+     forChangeType:(NSFetchedResultsChangeType)type
 {
     switch (type) {
         case NSFetchedResultsChangeInsert:
@@ -457,11 +457,11 @@ shouldReloadTableForSearchScope:(NSInteger) searchOption
 }
 
 
-- (void)controller:(NSFetchedResultsController *) controller
-   didChangeObject:(id) anObject
-       atIndexPath:(NSIndexPath *) indexPath
-     forChangeType:(NSFetchedResultsChangeType) type
-      newIndexPath:(NSIndexPath *) newIndexPath
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
 {
     UITableView *tableView = self.tableView;
 
@@ -502,7 +502,7 @@ shouldReloadTableForSearchScope:(NSInteger) searchOption
 }
 
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *) controller
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
 }
