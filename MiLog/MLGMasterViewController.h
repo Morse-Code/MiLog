@@ -11,21 +11,20 @@
 #import <CoreData/CoreData.h>
 #import "MLGDetailViewController.h"
 
-@interface MLGMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
+@interface MLGMasterViewController : UITableViewController < NSFetchedResultsControllerDelegate, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate >
 
 
+@property (strong, nonatomic) MLGDetailViewController *detailViewController;
 
-@property(strong, nonatomic) MLGDetailViewController *detailViewController;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSTimer *pollingTimer;
+@property (nonatomic, assign) int activeTimerCount;
+@property (strong, nonatomic) NSMutableArray *searchResults;
 
-@property(strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property(strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property(strong, nonatomic) NSTimer *pollingTimer;
-@property(nonatomic, assign) int activeTimerCount;
-@property(strong, nonatomic) NSMutableArray *searchResults;
+- (void)startTimerWithTimerEvent:(TimerEvent *) event;
 
-- (void)startTimerWithTimerEvent:(TimerEvent *)event;
-
-- (void)pauseTimerWithTimerEvent:(TimerEvent *)event;
+- (void)pauseTimerWithTimerEvent:(TimerEvent *) event;
 
 - (void)updateTimers;
 
