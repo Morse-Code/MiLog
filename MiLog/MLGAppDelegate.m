@@ -46,7 +46,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     UINavigationController *navigationController = (UINavigationController *) self.window.rootViewController;
-    MLGMasterViewController *controller = (MLGMasterViewController *) navigationController.topViewController;
+    MLGMasterViewController *controller = (MLGMasterViewController *)[[navigationController viewControllers] objectAtIndex:0];
     NSArray *fetchedEvents = [[controller fetchedResultsController] fetchedObjects];
     controller.activeTimerCount = 0;
     for (TimerEvent *anEvent in fetchedEvents) {
