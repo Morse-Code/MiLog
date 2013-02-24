@@ -210,9 +210,9 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"TimerCell";
     MLGTimerCell *cell = (MLGTimerCell *)[self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[MLGTimerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
+//    if (cell == nil) {
+//        cell = [[MLGTimerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+//    }
     [self tableView:tableView configureCell:cell atIndexPath:indexPath];
     return cell;
 }

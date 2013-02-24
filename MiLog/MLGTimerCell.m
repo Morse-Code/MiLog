@@ -20,6 +20,7 @@
 
 @synthesize name, timer, startDate;
 @synthesize startTime = _startTime;
+@synthesize event = _event;
 
 static NSDateFormatter *dateFormatter = nil;
 static NSDateFormatter *timeFormatter = nil;
@@ -50,7 +51,8 @@ static NSDateFormatter *timeFormatter = nil;
         [timeFormatter setDateStyle:NSDateFormatterNoStyle];
         [timeFormatter setTimeStyle:NSDateFormatterShortStyle];
     }
-
+    
+    self.event = event;
     self.startDate.text = [dateFormatter stringFromDate:event.timeStamp];
     self.startTime.text = [timeFormatter stringFromDate:event.timeStamp];
     self.name.text = [[event name] description];
